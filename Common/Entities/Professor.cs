@@ -10,4 +10,5 @@ public class Professor : Person
     public int FacultyID { get; set; }
 
     public virtual Faculty Faculty { get; set; }
+    public virtual Faculty DeanOfFaculty { get; set; }
 }
