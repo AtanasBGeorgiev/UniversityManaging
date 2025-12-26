@@ -8,4 +8,6 @@ public class Student : Person
     [Key]
     public int StudentID { get; set; }
     public int FacultyID { get; set; }
+
+    public virtual Faculty Faculty { get; set; }
 }

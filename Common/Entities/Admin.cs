@@ -2,7 +2,7 @@ using System;
 
 namespace Common.Entities;
 
-public class Admin:Person
+public class Admin : Person
 {
-    public int AdminID{get;set;}
+    public int AdminID { get; set; }
 }

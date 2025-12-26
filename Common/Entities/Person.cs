@@ -8,5 +8,8 @@ public class Person
     public string LName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
-    public string Role { get; set; }
+    public int RoleID { get; set; }
+
+
+    public virtual Role Role { get; set; }
 }
