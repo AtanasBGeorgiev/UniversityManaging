@@ -70,6 +70,8 @@ where T : class
             Items.Update(item);
         else
             Items.Add(item);
+
+        Context.SaveChanges();
     }
     public void Delete(T item)
     {
