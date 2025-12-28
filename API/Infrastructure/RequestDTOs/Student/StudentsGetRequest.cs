@@ -3,7 +3,7 @@ using API.Infrastructure.RequestDTOs.Shared;
 
 namespace API.Infrastructure.RequestDTOs.Student;
 
-public class StudentFilterRequest : PersonFilterRequest
+public class StudentsGetRequest : BaseGetRequest<StudentFilterRequest>
 {
-    public int FacultyId { get; set; }
+
 }
