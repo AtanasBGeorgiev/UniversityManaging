@@ -3,7 +3,7 @@ using API.Infrastructure.RequestDTOs.Shared;
 
 namespace API.Infrastructure.RequestDTOs.Professor;
 
-public class ProfessorFilterRequest : PersonFilterRequest
+public class ProfessorRequest : PersonRequest
 {
     public int FacultyId { get; set; }
 }
