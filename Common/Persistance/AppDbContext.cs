@@ -16,17 +16,9 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        Env.Load();
-        string dbConnection = Environment.GetEnvironmentVariable("dbConnectionString");
-
-        if (string.IsNullOrEmpty(dbConnection))
-        {
-            throw new InvalidOperationException("Environment variable 'dbConnectionString' is not set.");
-        }
-
         optionsBuilder
             .UseLazyLoadingProxies()
-            .UseSqlServer(dbConnection);
+            .UseSqlServer(@"Server=LAPTOP-52MHJN06\SQLEXPRESS01;Database=UniversityManaging;Trusted_Connection=True;TrustServerCertificate=True;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -73,6 +65,22 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Faculty>()
         .Property(f => f.DeanID)
         .IsRequired(false);
+
+        modelBuilder.Entity<Faculty>()
+        .HasMany(f => f.Admins)
+        .WithMany()
+        .UsingEntity<AdminFaculty>(
+            af => af
+            .HasOne(af => af.Admin)
+            .WithMany()
+            .HasForeignKey(af => af.AdminID),
+            af => af
+            .HasOne(af => af.Faculty)
+            .WithMany()
+            .HasForeignKey(af => af.FacultyID),
+            af => af
+            .HasKey(t => new { t.AdminID, t.FacultyID })
+        );
 
         #endregion
 
@@ -125,6 +133,23 @@ public class AppDbContext : DbContext
         .HasForeignKey<Faculty>(f => f.DeanID)
         .OnDelete(DeleteBehavior.Restrict);
 
+        modelBuilder.Entity<Professor>(
+            p => p
+            .HasMany(p => p.Students)
+            .WithMany()
+            .UsingEntity<StudentProfessor>(
+                sp => sp
+                .HasOne(sp => sp.Student)
+                .WithMany()
+                .HasForeignKey(sp => sp.StudentID),
+                sp => sp
+                .HasOne(sp => sp.Professor)
+                .WithMany()
+                .HasForeignKey(sp => sp.ProfessorID),
+                sp => sp
+                .HasKey(t => new { t.StudentID, t.ProfessorID }))
+        );
+
         #endregion
 
         #region Course
@@ -171,7 +196,7 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(e => e.CourseID),
             e => e
-            .HasKey(k => new { k.CourseID, k.StudentID })
+            .HasKey(k => new { k.StudentID, k.CourseID })
         );
 
         #endregion
