@@ -2,7 +2,7 @@ using System;
 
 namespace API.Infrastructure.RequestDTOs.Course;
 
-public class CourseFilterRequest
+public class CourseRequest
 {
     public string Title { get; set; }
     public int Credits { get; set; }
