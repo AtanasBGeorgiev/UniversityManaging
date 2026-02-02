@@ -18,7 +18,7 @@ public class AppDbContext : DbContext
     {
         optionsBuilder
             .UseLazyLoadingProxies()
-            .UseSqlServer(@"Server=LAPTOP-52MHJN06\SQLEXPRESS01;Database=UniversityManaging;Trusted_Connection=True;TrustServerCertificate=True;");
+            .UseSqlServer(@"YOUR_DB_CONNECTION_STRING");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
