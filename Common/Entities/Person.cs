@@ -2,7 +2,7 @@ using System;
 
 namespace Common.Entities;
 
-public class Person
+public abstract class Person : BaseEntity
 {
     public string FName { get; set; }
     public string LName { get; set; }

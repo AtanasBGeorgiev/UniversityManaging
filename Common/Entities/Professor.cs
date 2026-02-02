@@ -11,4 +11,10 @@ public class Professor : Person
 
     public virtual Faculty Faculty { get; set; }
     public virtual Faculty DeanOfFaculty { get; set; }
+    public virtual List<Student> Students { get; set; }
+
+    public override int[] GetIds()
+    {
+        return [ProfessorID];
+    }
 }
